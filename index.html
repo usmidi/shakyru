@@ -4,10 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Приглашение на свадьбу</title>
-    <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
     <style>
         body {
             background: linear-gradient(135deg, #f9f7fe, #e6e9ff);
@@ -17,15 +16,13 @@
             padding: 0;
         }
 
-        /* На всю ширину экрана */
         .section-full {
             width: 100vw;
             margin-left: calc(-50vw + 50%);
-            padding: 10px 0; /* 🔧 ОСНОВНОЙ ИНТЕРВАЛ МЕЖДУ БЛОКАМИ: 10px сверху и снизу */
+            padding: 10px 0;
             box-sizing: border-box;
         }
 
-        /* Hero Section */
         .hero {
             background: url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=1920') no-repeat center center/cover;
             height: 100vh;
@@ -45,7 +42,7 @@
             height: 100%;
             background: rgba(0,0,0,0.4);
         }
-        .hero h2 {  /* ✅ Теперь h2 */
+        .hero h2 {
             font-family: 'Playfair Display', serif;
             font-size: 3.5rem;
             text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
@@ -58,7 +55,6 @@
             margin: 0 auto;
         }
 
-        /* Единый стиль для всех внутренних блоков */
         .card-block {
             background-color: #fff;
             padding: 40px;
@@ -69,17 +65,15 @@
             text-align: left;
         }
 
-        /* Заголовки по центру */
         .card-block h1,
         .card-block h2,
         .card-block h3 {
-            text-align: center; /* 🔹 Заголовки теперь по центру */
+            text-align: center;
             color: #333;
             margin-top: 0;
             margin-bottom: 1.5rem;
         }
 
-        /* Таймер */
         .timer-box {
             display: inline-block;
             margin: 0 15px;
@@ -97,28 +91,6 @@
             margin-top: 8px;
         }
 
-        /* Кнопка "Открыть в Яндекс Картах" */
-        .address-button {
-            display: block;
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        /* Анимация появления */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .fade-in {
-            animation: fadeIn 1s ease-out forwards;
-            opacity: 0;
-        }
-        .section:nth-child(2) .fade-in { animation-delay: 0.3s; }
-        .section:nth-child(3) .fade-in { animation-delay: 0.6s; }
-        .section:nth-child(4) .fade-in { animation-delay: 0.9s; }
-        footer .fade-in { animation-delay: 1.2s; }
-
-        /* 🔊 СТИЛИ ДЛЯ МУЗЫКИ — ВСЁ В ОДНОМ МЕСТЕ */
         #toggleMusic {
             position: fixed;
             bottom: 20px;
@@ -137,7 +109,6 @@
             transition: 0.3s;
             z-index: 1050;
         }
-
         #toggleMusic:hover {
             background: #fff;
         }
@@ -147,7 +118,7 @@
 
     <!-- Hero Section -->
     <section class="section-full hero fade-in">
-        <div class="content" style="position: relative; z-index: 2; width: 100%;">
+        <div class="content" style="position: relative; z-index: 2;">
             <h2>Свадьба<br>Ивана & Марии</h2>
             <p>Приглашаем вас разделить с нами этот особенный день</p>
         </div>
@@ -159,21 +130,18 @@
             <div class="card-block fade-in">
                 <h1>Место проведения</h1>
                 <h4>Ресторан Хан Султан</h4>
+
+                <!-- 📌 Ты меняешь дату только здесь -->
                 <p>Улица Райымбек батыра, 166а, Алматы</p>
                 <p><strong>Дата:</strong> 02 февраля 2026 г.</p>
                 <p><strong>Время:</strong> 16:00</p>
 
-                <!-- Яндекс Карты -->
                 <div class="container text-center mt-4">
                     <iframe src="https://yandex.kz/map-widget/v1/-/CLGLIFNu" 
-                            width="100%" 
-                            height="300" 
-                            frameborder="0" 
-                            allowfullscreen>
-                    </iframe>
+                            width="100%" height="300" frameborder="0" allowfullscreen></iframe>
                 </div>
 
-                <div class="address-button">
+                <div class="text-center mt-3">
                     <a href="https://yandex.kz/maps/-/CLGLIFNu" target="_blank" class="btn btn-primary">
                         📍 Открыть в Яндекс Картах →
                     </a>
@@ -209,7 +177,7 @@
         </div>
     </section>
 
-    <!-- RSVP Form — В САМОМ НИЗУ -->
+    <!-- RSVP Section -->
     <section class="section-full">
         <div class="container">
             <div class="card-block fade-in">
@@ -219,31 +187,27 @@
                         <label for="name" class="form-label">Ваше имя</label>
                         <input type="text" class="form-control" id="name" required>
                     </div>
+
                     <div class="mb-3">
                         <label class="form-label d-block">Вы приходите:</label>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="attendance" id="alone" value="один(а)" required>
-                            <label class="form-check-label" for="alone">Один(а)</label>
+                            <input class="form-check-input" type="radio" name="attendance" value="один(а)" required>
+                            <label class="form-check-label">Один(а)</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="attendance" id="withPartner" value="с супругой/супругом">
-                            <label class="form-check-label" for="withPartner">С супругой/супругом</label>
+                            <input class="form-check-input" type="radio" name="attendance" value="с супругой/супругом">
+                            <label class="form-check-label">С супругой/супругом</label>
                         </div>
                     </div>
-                    <!-- Обновлённая кнопка -->
+
                     <div class="text-center mt-3">
                         <button type="submit" class="btn btn-primary" id="submitBtn" style="
-                            display: inline-block;
                             padding: 12px 28px;
                             font-size: 1.1rem;
                             font-weight: bold;
                             background-color: #25D366;
-                            color: white;
                             border: none;
-                            border-radius: 10px;        <!-- 🔧 СКРУГЛЕНИЕ КНОПКИ -->
-                            cursor: pointer;
-                            box-shadow: 0 4px 10px rgba(37, 211, 102, 0.4);
-                            transition: all 0.3s ease;
+                            border-radius: 10px;
                         ">
                             Отправить 📲
                         </button>
@@ -253,182 +217,88 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="bg-light text-center py-4">
-        <p class="fade-in">&copy; 2025 Иван & Мария</p>
+        <p>&copy; 2025 Иван & Мария</p>
     </footer>
 
-    <!-- 🔊 HTML-ЭЛЕМЕНТЫ ДЛЯ МУЗЫКИ — ВСЁ В ОДНОМ МЕСТЕ -->
-    <!-- Файл music.mp3 должен лежать рядом с wedding-invite.html -->
     <audio id="bgMusic" autoplay loop muted>
         <source src="music.mp3" type="audio/mpeg">
-        Ваш браузер не поддерживает аудио.
     </audio>
-
-    <!-- Кнопка -->
     <div id="toggleMusic">🔇</div>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
     <script>
-        // Функция для извлечения даты и времени из HTML
         function getWeddingDateTime() {
-            // Получаем все элементы p внутри .address
-            const addressElements = document.querySelectorAll('.address p');
+            const allP = document.querySelectorAll('.card-block p');
 
-            let dateText = '';
-            let timeText = '';
+            let dateText = "", timeText = "";
 
-            addressElements.forEach(p => {
-                const text = p.textContent;
-                if (text.includes('Дата:')) {
-                    dateText = text;
-                }
-                if (text.includes('Время:')) {
-                    timeText = text;
-                }
+            allP.forEach(p => {
+                const txt = p.textContent.trim();
+                if (txt.startsWith("Дата:")) dateText = txt;
+                if (txt.startsWith("Время:")) timeText = txt;
             });
 
-            if (!dateText || !timeText) {
-                console.error("Не найдены элементы с датой или временем в блоке .address");
-                // Возвратим дату по умолчанию, если элементы не найдены
-                return new Date("June 25, 2026 16:00:00").getTime();
-            }
-
-            // Извлекаем дату: "Дата: 25 июня 2026 г." -> "25 июня 2026"
-            const dateMatch = dateText.match(/Дата:\s*(\d{1,2})\s*(\w+)\s*(\d{4})/);
-            if (!dateMatch) {
-                console.error("Не удалось извлечь дату из HTML");
-                return new Date("June 25, 2026 16:00:00").getTime();
-            }
-
-            // Извлекаем время: "Время: 16:00" -> "16:00"
+            const dateMatch = dateText.match(/Дата:\s*(\d{2})\s+(\S+)\s+(\d{4})/);
             const timeMatch = timeText.match(/Время:\s*(\d{1,2}:\d{2})/);
-            if (!timeMatch) {
-                console.error("Не удалось извлечь время из HTML");
-                return new Date("June 25, 2026 16:00:00").getTime();
-            }
+
+            if (!dateMatch || !timeMatch) return new Date("2026-02-02 16:00");
 
             const day = dateMatch[1];
-            const monthName = dateMatch[2];
+            const monthName = dateMatch[2].toLowerCase();
             const year = dateMatch[3];
             const time = timeMatch[1];
 
-            // Преобразуем название месяца в номер (только для русского)
             const monthMap = {
-                "января": "01", "февраля": "02", "марта": "03", "апреля": "04",
-                "мая": "05", "июня": "06", "июля": "07", "августа": "08",
-                "сентября": "09", "октября": "10", "ноября": "11", "декабря": "12"
+                "января": "01","февраля": "02","марта": "03","апреля": "04",
+                "мая": "05","июня": "06","июля": "07","августа": "08",
+                "сентября": "09","октября": "10","ноября": "11","декабря": "12"
             };
 
-            const month = monthMap[monthName.toLowerCase()];
-            if (!month) {
-                console.error("Неизвестный месяц:", monthName);
-                return new Date("June 25, 2026 16:00:00").getTime();
-            }
-
-            // Собираем строку в формате: YYYY-MM-DD HH:MM
-            const dateString = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')} ${time}`;
-            console.log("Извлеченная дата для таймера:", dateString);
-
-            return new Date(dateString).getTime();
+            const month = monthMap[monthName];
+            return new Date(`${year}-${month}-${day} ${time}`);
         }
 
-        // Получаем дату свадьбы из HTML
-        const weddingDate = getWeddingDateTime();
+        const weddingDate = getWeddingDateTime().getTime();
 
-        // Запускаем таймер
-        const countdown = setInterval(() => {
-            const now = new Date().getTime();
-            const distance = weddingDate - now;
+        setInterval(() => {
+            const now = Date.now();
+            const diff = weddingDate - now;
 
-            if (distance < 0) {
-                clearInterval(countdown);
-                document.getElementById("days").innerText = "00";
-                document.getElementById("hours").innerText = "00";
-                document.getElementById("minutes").innerText = "00";
-                document.getElementById("seconds").innerText = "00";
-                return;
-            }
+            if (diff <= 0) return;
 
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            document.getElementById("days").innerText = String(days).padStart(2, '0');
-            document.getElementById("hours").innerText = String(hours).padStart(2, '0');
-            document.getElementById("minutes").innerText = String(minutes).padStart(2, '0');
-            document.getElementById("seconds").innerText = String(seconds).padStart(2, '0');
+            document.getElementById("days").textContent = String(Math.floor(diff / 86400000)).padStart(2, "0");
+            document.getElementById("hours").textContent = String(Math.floor((diff % 86400000) / 3600000)).padStart(2, "0");
+            document.getElementById("minutes").textContent = String(Math.floor((diff % 3600000) / 60000)).padStart(2, "0");
+            document.getElementById("seconds").textContent = String(Math.floor((diff % 60000) / 1000)).padStart(2, "0");
         }, 1000);
 
-        // Форма → WhatsApp
         document.getElementById("rsvpForm").addEventListener("submit", function(e) {
             e.preventDefault();
-
-            const name = document.getElementById("name").value.trim();
+            const name = document.getElementById("name").value;
             const attendance = document.querySelector('input[name="attendance"]:checked').value;
-
-            if (!name) {
-                alert("Введите имя.");
-                return;
-            }
-
-            const phoneNumber = "77081698869";
-            const message = encodeURIComponent(
-                `Здравствуйте, Иван и Мария! 🎉\n\nЯ, ${name}, подтверждаю участие.\nПриду ${attendance}.\n\nС теплом,\n${name}`
-            );
-            const whatsappLink = `https://wa.me/${phoneNumber}?text=${message}`;
-
-            const submitBtn = document.getElementById("submitBtn");
-            submitBtn.textContent = "Открываю WhatsApp...";
-            submitBtn.disabled = true;
-
-            window.open(whatsappLink, "_blank");
-
-            setTimeout(() => {
-                submitBtn.textContent = "Отправить 📲";
-                submitBtn.disabled = false;
-            }, 2000);
+            const phone = "77081698869";
+            const msg = encodeURIComponent(`Здравствуйте! Я, ${name}, подтверждаю участие. Приду ${attendance}.`);
+            window.open(`https://wa.me/${phone}?text=${msg}`, "_blank");
         });
 
-        // 🔊 ФУНКЦИОНАЛ МУЗЫКИ — ВСЁ В ОДНОМ МЕСТЕ
         const bgMusic = document.getElementById("bgMusic");
         const toggleMusic = document.getElementById("toggleMusic");
-
-        let musicOn = false;
-
-        // Громкость (вступит в силу после снятия mute)
         bgMusic.volume = 0.4;
 
-        // ⚡ Обход ограничения браузеров:
-        // 1. Музыка запускается тихо (muted autoplay)
-        // 2. Через 1.2 сек включаем звук автоматически
         setTimeout(() => {
             bgMusic.muted = false;
-            toggleMusic.innerHTML = "🔊";
-            musicOn = true;
+            toggleMusic.textContent = "🔊";
         }, 1200);
 
-        // Управление музыкой вручную
-        toggleMusic.addEventListener("click", () => {
-            if (musicOn) {
-                bgMusic.pause();
-                toggleMusic.innerHTML = "🔇";
-                musicOn = false;
+        toggleMusic.onclick = () => {
+            if (bgMusic.paused) {
+                bgMusic.play();
+                toggleMusic.textContent = "🔊";
             } else {
-                bgMusic.play()
-                    .then(() => {
-                        bgMusic.muted = false;
-                        toggleMusic.innerHTML = "🔊";
-                        musicOn = true;
-                    })
-                    .catch(() => {
-                        alert("Браузер блокирует автоплей — нажмите ещё раз.");
-                    });
+                bgMusic.pause();
+                toggleMusic.textContent = "🔇";
             }
-        });
+        };
     </script>
 
 </body>
