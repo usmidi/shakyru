@@ -1,305 +1,390 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Приглашение на свадьбу</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Приглашение на свадьбу — Иван & Мария</title>
 
-    <style>
-        body {
-            background: linear-gradient(135deg, #f9f7fe, #e6e9ff);
-            font-family: 'Poppins', sans-serif;
-            color: #444;
-            margin: 0;
-            padding: 0;
-        }
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
-        .section-full {
-            width: 100vw;
-            margin-left: calc(-50vw + 50%);
-            padding: 10px 0;
-            box-sizing: border-box;
-        }
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-        .hero {
-            background: url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=1920') no-repeat center center/cover;
-            height: 100vh;
-            color: white;
-            text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-        .hero::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.4);
-        }
-        .hero h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 3.5rem;
-            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
-            margin-bottom: 1rem;
-        }
-        .hero p {
-            font-size: 1.5rem;
-            font-weight: 300;
-            max-width: 700px;
-            margin: 0 auto;
-        }
+<style>
+  :root{
+    --accent:#C77DFF;
+    --accent-2:#FF9DB5;
+    --bg:#FBF9FF;
+    --card:#ffffff;
+    --muted:#7b7b7b;
+    --glass: rgba(255,255,255,0.65);
+  }
 
-        .card-block {
-            background-color: #fff;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-            max-width: 900px;
-            margin: 0 auto;
-            text-align: left;
-        }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(180deg,#fbf9ff 0%, #f3f7ff 100%);
+    color:#222;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    overflow-x:hidden;
+  }
 
-        .card-block h1,
-        .card-block h2,
-        .card-block h3 {
-            text-align: center;
-            color: #333;
-            margin-top: 0;
-            margin-bottom: 1.5rem;
-        }
+  /* ---------- WELCOME / SPLASH ---------- */
+  #welcome {
+    position:fixed;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    z-index:1000;
+    background: radial-gradient(ellipse at center, rgba(0,0,0,0.18), rgba(0,0,0,0.35));
+  }
+  #welcome .bg {
+    position:absolute;
+    inset:0;
+    background-image: url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=1920');
+    background-size:cover;
+    background-position:center;
+    filter: blur(6px) brightness(.9) saturate(1.1);
+    transform: scale(1.05);
+    will-change: transform;
+  }
+  #welcome::after{
+    content:"";
+    position:absolute; inset:0;
+    background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(0,0,0,0.18));
+    mix-blend-mode:overlay;
+  }
+  .welcome-inner{
+    position:relative;
+    z-index:2;
+    padding:40px;
+    max-width:900px;
+    color:#fff;
+    text-shadow: 0 6px 18px rgba(0,0,0,0.5);
+    transform-origin:center;
+    animation: popIn .9s cubic-bezier(.2,.9,.3,1);
+  }
+  @keyframes popIn{
+    from{opacity:0; transform:translateY(18px) scale(.98)}
+    to{opacity:1; transform:translateY(0) scale(1)}
+  }
+  .headline{
+    font-family: 'Playfair Display', serif;
+    font-weight:700;
+    font-size: clamp(28px, 5.2vw, 54px);
+    line-height:1;
+    margin:0 0 14px;
+  }
+  .subline{
+    font-size: clamp(14px, 2.2vw, 20px);
+    opacity:.95;
+    margin-bottom:22px;
+    font-weight:300;
+  }
+  .btn-open{
+    display:inline-flex;
+    gap:10px;
+    align-items:center;
+    background: linear-gradient(90deg,var(--accent),var(--accent-2));
+    border:none;
+    color:#fff;
+    padding:14px 28px;
+    border-radius:999px;
+    font-weight:600;
+    font-size:16px;
+    cursor:pointer;
+    box-shadow: 0 10px 30px rgba(199,125,255,0.22);
+    transition: transform .28s ease, box-shadow .28s ease;
+  }
+  .btn-open:hover{ transform: translateY(-4px); box-shadow:0 18px 40px rgba(199,125,255,0.28); }
+  .hint{ font-size:12px; opacity:.9; margin-top:10px }
 
-        .timer-box {
-            display: inline-block;
-            margin: 0 15px;
-            text-align: center;
-        }
-        .timer-value {
-            font-size: 3rem;
-            font-weight: bold;
-            color: #6a5acd;
-            font-family: 'Playfair Display', serif;
-        }
-        .timer-label {
-            font-size: 1.1rem;
-            color: #666;
-            margin-top: 8px;
-        }
+  /* ---------- NAVBAR ---------- */
+  nav{
+    position:fixed;
+    top:18px; left:50%;
+    transform:translateX(-50%);
+    z-index:1200;
+    width:calc(100% - 40px);
+    max-width:1100px;
+    display:flex;
+    justify-content:center;
+    pointer-events:none;
+  }
+  nav .nav-inner{
+    pointer-events:auto;
+    display:flex;
+    gap:14px;
+    background: rgba(255,255,255,0.6);
+    backdrop-filter: blur(8px);
+    padding:8px 14px;
+    border-radius:999px;
+    box-shadow: 0 6px 22px rgba(16,24,40,0.08);
+    align-items:center;
+  }
+  nav a{
+    color:#2b2b2b; text-decoration:none; font-weight:600; font-size:14px;
+    padding:6px 10px; border-radius:8px;
+  }
+  nav a:hover{ background: rgba(0,0,0,0.04) }
 
-        #toggleMusic {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 60px;
-            height: 60px;
-            background: #ffffffdd;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 28px;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-            user-select: none;
-            transition: 0.3s;
-            z-index: 1050;
-        }
-        #toggleMusic:hover {
-            background: #fff;
-        }
-    </style>
+  /* ---------- MAIN LAYOUT ---------- */
+  main{ padding-top:120px; }
+  .section{ padding:10px 18px; display:block; }
+  .card {
+    max-width:980px;
+    margin: 0 auto 40px auto;
+    background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.98));
+    border-radius:18px;
+    padding:34px;
+    box-shadow: 0 18px 50px rgba(16,24,40,0.06);
+  }
+  .title{
+    font-family:'Playfair Display', serif;
+    font-size: clamp(20px,4.2vw,36px);
+    margin:0 0 8px;
+    text-align:center;
+    color:#2a2a2a;
+  }
+  .muted{ color:var(--muted); font-size:14px; text-align:center; margin-bottom:18px; }
+
+  /* timer */
+  .timer-grid{
+    display:flex;
+    gap:18px;
+    justify-content:center;
+    margin-top:18px;
+    flex-wrap:wrap;
+  }
+  .time-box{
+    min-width:90px;
+    background: linear-gradient(180deg,#fff,#fbfbff);
+    border-radius:12px;
+    padding:14px 16px;
+    text-align:center;
+    box-shadow: 0 8px 24px rgba(31,41,55,0.06);
+  }
+  .time-value{
+    font-family:'Playfair Display', serif;
+    font-size:28px; font-weight:700; color:var(--accent);
+  }
+  .time-label{ font-size:13px; color:var(--muted); margin-top:6px; }
+
+  .map-wrap{ margin-top:18px; border-radius:12px; overflow:hidden; }
+
+  /* THANKS MODAL */
+  #thanks {
+    position:fixed; inset:0; display:flex; align-items:center; justify-content:center;
+    background: rgba(8,10,20,0.32); z-index:2000; visibility:hidden; opacity:0;
+    transition: opacity .28s ease, visibility .28s;
+  }
+  #thanks .box{
+    background:#fff; padding:22px; border-radius:12px; max-width:420px; text-align:center;
+    box-shadow: 0 18px 50px rgba(16,24,40,0.12);
+  }
+  #thanks.show{ visibility:visible; opacity:1; }
+
+  /* RSVP custom button */
+  .btn-gradient{
+    background: linear-gradient(90deg, #C77DFF, #FF9DB5);
+    color:#fff;
+    border:none;
+    border-radius:50px;
+    font-size:1.1rem;
+    transition: all 0.3s ease;
+  }
+  .btn-gradient:hover{
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(199,125,255,0.35);
+  }
+
+  footer{ text-align:center; padding:28px 16px; color:var(--muted); font-size:14px; }
+</style>
 </head>
 <body>
 
-    <!-- Hero Section -->
-    <section class="section-full hero fade-in">
-        <div class="content" style="position: relative; z-index: 2;">
-            <h2>Свадьба<br>Ивана & Марии</h2>
-            <p>Приглашаем вас разделить с нами этот особенный день</p>
+<!-- NAV -->
+<nav aria-label="Главное меню">
+  <div class="nav-inner" role="navigation">
+    <a href="#home" onclick="scrollToId(event,'home')">Главная</a>
+    <a href="#invite" onclick="scrollToId(event,'invite')">Приглашение</a>
+    <a href="#location" onclick="scrollToId(event,'location')">Место</a>
+    <a href="#rsvp" onclick="scrollToId(event,'rsvp')">RSVP</a>
+  </div>
+</nav>
+
+<!-- WELCOME / SPLASH -->
+<section id="welcome" aria-hidden="false">
+  <div class="bg" aria-hidden="true"></div>
+  <div class="welcome-inner" id="home">
+    <h1 class="headline">Мы решили пожениться</h1>
+    <p class="subline">Искренне приглашаем вас разделить с нами этот счастливый день</p>
+    <button class="btn-open" id="openBtn" aria-label="Открыть приглашение">Открыть приглашение</button>
+  </div>
+</section>
+
+<main id="main" style="opacity:0; transform:translateY(18px); transition: all .7s ease; pointer-events:none;">
+  <!-- INVITATION -->
+  <section class="section" id="invite">
+    <div class="card text-center">
+      <h2 class="title">Иван & Мария</h2>
+      <p class="muted">Мы будем рады видеть вас на нашей свадьбе</p>
+      <div class="mt-3">
+        <p style="margin:6px 0 0;"><strong>Дата:</strong> 02 февраля 2026 г.</p>
+        <p style="margin:2px 0 12px;"><strong>Время:</strong> 16:00</p>
+        <div class="timer-grid" role="timer" aria-live="polite">
+          <div class="time-box"><div class="time-value" id="days">00</div><div class="time-label">Дней</div></div>
+          <div class="time-box"><div class="time-value" id="hours">00</div><div class="time-label">Часов</div></div>
+          <div class="time-box"><div class="time-value" id="minutes">00</div><div class="time-label">Минут</div></div>
+          <div class="time-box"><div class="time-value" id="seconds">00</div><div class="time-label">Секунд</div></div>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- Address Section -->
-    <section class="section-full">
-        <div class="container">
-            <div class="card-block fade-in">
-                <h1>Место проведения</h1>
-                <h4>Ресторан Хан Султан</h4>
-
-                <!-- 📌 Ты меняешь дату только здесь -->
-                <p>Улица Райымбек батыра, 166а, Алматы</p>
-                <p><strong>Дата:</strong> 02 февраля 2026 г.</p>
-                <p><strong>Время:</strong> 16:00</p>
-
-                <div class="container text-center mt-4">
-                    <iframe src="https://yandex.kz/map-widget/v1/-/CLGLIFNu" 
-                            width="100%" height="300" frameborder="0" allowfullscreen></iframe>
-                </div>
-
-                <div class="text-center mt-3">
-                    <a href="https://yandex.kz/maps/-/CLGLIFNu" target="_blank" class="btn btn-primary">
-                        📍 Открыть в Яндекс Картах →
-                    </a>
-                </div>
-            </div>
+  <!-- LOCATION -->
+  <section class="section" id="location">
+    <div class="card">
+      <h3 class="title">Место проведения</h3>
+      <p class="muted">Ресторан Хан Султан — Улица Райымбек батыра, 166а, Алматы</p>
+      <div class="d-flex flex-column gap-3 mt-3">
+        <div class="map-wrap">
+          <iframe src="https://yandex.kz/map-widget/v1/-/CLGLIFNu" width="100%" height="320" frameborder="0" allowfullscreen style="border:0"></iframe>
         </div>
-    </section>
-
-    <!-- Countdown Section -->
-    <section class="section-full">
-        <div class="container">
-            <div class="card-block fade-in">
-                <h3>До свадьбы осталось:</h3>
-                <div id="countdown-timer" class="d-flex justify-content-center">
-                    <div class="timer-box">
-                        <div class="timer-value" id="days">00</div>
-                        <div class="timer-label">Дней</div>
-                    </div>
-                    <div class="timer-box">
-                        <div class="timer-value" id="hours">00</div>
-                        <div class="timer-label">Часов</div>
-                    </div>
-                    <div class="timer-box">
-                        <div class="timer-value" id="minutes">00</div>
-                        <div class="timer-label">Минут</div>
-                    </div>
-                    <div class="timer-box">
-                        <div class="timer-value" id="seconds">00</div>
-                        <div class="timer-label">Секунд</div>
-                    </div>
-                </div>
-            </div>
+        <div class="d-flex gap-3 flex-wrap justify-content-center mt-2">
+          <a href="https://yandex.kz/maps/-/CLGLIFNu" target="_blank" rel="noopener" class="btn btn-primary px-3 py-2">Открыть в Яндекс.Картах</a>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- RSVP Section -->
-    <section class="section-full">
-        <div class="container">
-            <div class="card-block fade-in">
-                <h2>Подтвердите ваше участие</h2>
-                <form id="rsvpForm">
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Ваше имя</label>
-                        <input type="text" class="form-control" id="name" required>
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label d-block">Вы приходите:</label>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="attendance" value="один(а)" required>
-                            <label class="form-check-label">Один(а)</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="attendance" value="с супругой/супругом">
-                            <label class="form-check-label">С супругой/супругом</label>
-                        </div>
-                    </div>
-
-                    <div class="text-center mt-3">
-                        <button type="submit" class="btn btn-primary" id="submitBtn" style="
-                            padding: 12px 28px;
-                            font-size: 1.1rem;
-                            font-weight: bold;
-                            background-color: #25D366;
-                            border: none;
-                            border-radius: 10px;
-                        ">
-                            Отправить 📲
-                        </button>
-                    </div>
-                </form>
-            </div>
+  <!-- RSVP -->
+  <section class="section" id="rsvp">
+    <div class="card shadow-lg p-5" style="max-width:700px; margin:0 auto; border-radius:20px;">
+      <h3 class="title mb-3">Подтвердите участие (RSVP)</h3>
+      <p class="muted text-center mb-4">Пожалуйста, оставьте ваше имя и выберите участие</p>
+      <form id="rsvpForm" class="row g-4" autocomplete="off" aria-label="Форма подтверждения">
+        <div class="col-md-6">
+          <input type="text" class="form-control form-control-lg" id="guestName" placeholder="Ваше имя" required>
         </div>
-    </section>
+        <div class="col-md-6">
+          <select class="form-select form-select-lg" id="attendance" required>
+            <option value="Приеду один(а)">Приеду один(а)</option>
+            <option value="Приеду с партнером">Приеду с партнером</option>
+            <option value="Не смогу прийти">Не смогу прийти</option>
+          </select>
+        </div>
+        <div class="col-12 text-center mt-3">
+          <button type="submit" class="btn btn-gradient px-5 py-3 fw-bold">Отправить в WhatsApp</button>
+        </div>
+      </form>
+    </div>
+  </section>
 
-    <footer class="bg-light text-center py-4">
-        <p>&copy; 2025 Иван & Мария</p>
-    </footer>
+  <footer>
+    &copy; 2025 Иван & Мария — Спасибо, что с нами
+  </footer>
+</main>
 
-    <audio id="bgMusic" autoplay loop muted>
-        <source src="music.mp3" type="audio/mpeg">
-    </audio>
-    <div id="toggleMusic">🔇</div>
+<!-- THANKS MODAL -->
+<div id="thanks" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="box">
+    <h3 style="margin-top:0; font-family:'Playfair Display', serif">Спасибо!</h3>
+    <p class="small">Мы получили ваше сообщение. До скорой встречи!</p>
+    <div class="mt-2">
+      <button class="btn btn-gradient" onclick="closeThanks()">Закрыть</button>
+    </div>
+  </div>
+</div>
 
-    <script>
-        function getWeddingDateTime() {
-            const allP = document.querySelectorAll('.card-block p');
+<!-- AUDIO -->
+<audio id="audio" loop preload="auto">
+  <source src="music.mp3" type="audio/mpeg">
+  Ваш браузер не поддерживает аудио
+</audio>
 
-            let dateText = "", timeText = "";
+<script>
+function scrollToId(e,id){ if(e) e.preventDefault(); const el=document.getElementById(id); if(!el) return; el.scrollIntoView({behavior:'smooth', block:'start'}); }
 
-            allP.forEach(p => {
-                const txt = p.textContent.trim();
-                if (txt.startsWith("Дата:")) dateText = txt;
-                if (txt.startsWith("Время:")) timeText = txt;
-            });
+const openBtn=document.getElementById('openBtn');
+const welcome=document.getElementById('welcome');
+const main=document.getElementById('main');
+const audio=document.getElementById('audio');
 
-            const dateMatch = dateText.match(/Дата:\s*(\d{2})\s+(\S+)\s+(\d{4})/);
-            const timeMatch = timeText.match(/Время:\s*(\d{1,2}:\d{2})/);
+openBtn.addEventListener('click',()=>{
+  welcome.style.transition='opacity .6s ease, transform .6s ease';
+  welcome.style.opacity=0;
+  welcome.style.transform='scale(.98) translateY(-10px)';
+  setTimeout(()=>{ welcome.style.display='none'; },650);
 
-            if (!dateMatch || !timeMatch) return new Date("2026-02-02 16:00");
+  requestAnimationFrame(()=>{ main.style.pointerEvents='auto'; main.style.opacity=1; main.style.transform='translateY(0)'; });
 
-            const day = dateMatch[1];
-            const monthName = dateMatch[2].toLowerCase();
-            const year = dateMatch[3];
-            const time = timeMatch[1];
+  try{ audio.volume=0.65; const playPromise=audio.play(); if(playPromise!==undefined) playPromise.catch(()=>{}); }catch(e){console.warn('play audio failed',e);}
+  initCountdown();
+});
 
-            const monthMap = {
-                "января": "01","февраля": "02","марта": "03","апреля": "04",
-                "мая": "05","июня": "06","июля": "07","августа": "08",
-                "сентября": "09","октября": "10","ноября": "11","декабря": "12"
-            };
+function parseWeddingDate(){
+  const inviteCard=document.querySelector('#invite .card'); if(!inviteCard) return null;
+  const ps=inviteCard.querySelectorAll('p'); let dateText=null,timeText=null;
+  ps.forEach(p=>{ const txt=p.textContent.trim(); if(txt.indexOf('Дата:')===0) dateText=txt; if(txt.indexOf('Время:')===0) timeText=txt; });
+  if(!dateText) return new Date('2026-02-02 16:00').getTime();
+  const dMatch=dateText.match(/Дата:\s*(\d{1,2})\s+([^\s]+)\s+(\d{4})/i);
+  const tMatch=timeText?timeText.match(/Время:\s*(\d{1,2}:\d{2})/):null;
+  if(!dMatch) return new Date('2026-02-02 16:00').getTime();
+  const day=dMatch[1].padStart(2,'0'); const monthName=dMatch[2].toLowerCase(); const year=dMatch[3];
+  const time=(tMatch&&tMatch[1])?tMatch[1]:'16:00';
+  const monthMap={"января":"01","февраля":"02","марта":"03","апреля":"04","мая":"05","июня":"06","июля":"07","августа":"08","сентября":"09","октября":"10","ноября":"11","декабря":"12"};
+  const month=monthMap[monthName]||'02';
+  return new Date(`${year}-${month}-${day}T${time}:00`).getTime();
+}
 
-            const month = monthMap[monthName];
-            return new Date(`${year}-${month}-${day} ${time}`);
-        }
+let countdownInterval=null;
+function initCountdown(){
+  const target=parseWeddingDate();
+  if(!target) return;
+  if(countdownInterval) clearInterval(countdownInterval);
+  function update(){
+    const now=Date.now(); let diff=target-now;
+    const dEl=document.getElementById('days'),hEl=document.getElementById('hours'),mEl=document.getElementById('minutes'),sEl=document.getElementById('seconds');
+    if(diff<=0){ dEl.textContent='00'; hEl.textContent='00'; mEl.textContent='00'; sEl.textContent='00'; clearInterval(countdownInterval); return; }
+    const days=Math.floor(diff/(1000*60*60*24)); diff-=days*1000*60*60*24;
+    const hours=Math.floor(diff/(1000*60*60)); diff-=hours*1000*60*60;
+    const minutes=Math.floor(diff/(1000*60)); diff-=minutes*1000*60;
+    const seconds=Math.floor(diff/1000);
+    dEl.textContent=String(days).padStart(2,'0');
+    hEl.textContent=String(hours).padStart(2,'0');
+    mEl.textContent=String(minutes).padStart(2,'0');
+    sEl.textContent=String(seconds).padStart(2,'0');
+  }
+  update(); countdownInterval=setInterval(update,1000);
+}
 
-        const weddingDate = getWeddingDateTime().getTime();
+const rsvpForm=document.getElementById('rsvpForm');
+const thanks=document.getElementById('thanks');
+rsvpForm.addEventListener('submit',function(e){
+  e.preventDefault();
+  const name=document.getElementById('guestName').value.trim()||'Гость';
+  const attend=document.getElementById('attendance').value;
+  const phoneTarget='77081698869';
+  const text=`Здравствуйте, Иван и Мария!%0A%0AМеня зовут: ${encodeURIComponent(name)}%0AУчастие: ${encodeURIComponent(attend)}`;
+  const waLink=`https://wa.me/${phoneTarget}?text=${text}`;
+  window.open(waLink,'_blank');
+  showThanks();
+});
 
-        setInterval(() => {
-            const now = Date.now();
-            const diff = weddingDate - now;
+function showThanks(){ thanks.classList.add('show'); thanks.setAttribute('aria-hidden','false'); setTimeout(()=>{ closeThanks(); },5000); }
+function closeThanks(){ thanks.classList.remove('show'); thanks.setAttribute('aria-hidden','true'); }
+thanks.addEventListener('click',(e)=>{ if(e.target===thanks) closeThanks(); });
+document.addEventListener('keydown',(e)=>{ if(e.key==='Escape') closeThanks(); });
 
-            if (diff <= 0) return;
-
-            document.getElementById("days").textContent = String(Math.floor(diff / 86400000)).padStart(2, "0");
-            document.getElementById("hours").textContent = String(Math.floor((diff % 86400000) / 3600000)).padStart(2, "0");
-            document.getElementById("minutes").textContent = String(Math.floor((diff % 3600000) / 60000)).padStart(2, "0");
-            document.getElementById("seconds").textContent = String(Math.floor((diff % 60000) / 1000)).padStart(2, "0");
-        }, 1000);
-
-        document.getElementById("rsvpForm").addEventListener("submit", function(e) {
-            e.preventDefault();
-            const name = document.getElementById("name").value;
-            const attendance = document.querySelector('input[name="attendance"]:checked').value;
-            const phone = "77081698869";
-            const msg = encodeURIComponent(`Здравствуйте! Я, ${name}, подтверждаю участие. Приду ${attendance}.`);
-            window.open(`https://wa.me/${phone}?text=${msg}`, "_blank");
-        });
-
-        const bgMusic = document.getElementById("bgMusic");
-        const toggleMusic = document.getElementById("toggleMusic");
-        bgMusic.volume = 0.4;
-
-        setTimeout(() => {
-            bgMusic.muted = false;
-            toggleMusic.textContent = "🔊";
-        }, 1200);
-
-        toggleMusic.onclick = () => {
-            if (bgMusic.paused) {
-                bgMusic.play();
-                toggleMusic.textContent = "🔊";
-            } else {
-                bgMusic.pause();
-                toggleMusic.textContent = "🔇";
-            }
-        };
-    </script>
+(function openIfHash(){ if(location.hash&&location.hash.length>1){ document.getElementById('openBtn').click(); const id=location.hash.substring(1); setTimeout(()=>{ scrollToId(null,id); },700); }})();
+</script>
 
 </body>
 </html>
