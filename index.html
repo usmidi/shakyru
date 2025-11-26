@@ -1,402 +1,557 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Приглашение на свадьбу — Иван & Мария</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Приглашение на свадьбу — Иван & Мария</title>
 
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <!-- Подключение шрифтов Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
-<!-- Bootstrap CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Подключение Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <style>
+    :root {
+      --accent: #C77DFF;
+      --accent-2: #FF9DB5;
+      --bg: #FBF9FF;
+      --card: #ffffff;
+      --muted: #7b7b7b;
+      --glass: rgba(255, 255, 255, 0.65);
+    }
 
-<style>
-  :root{
-    --accent:#C77DFF;
-    --accent-2:#FF9DB5;
-    --bg:#FBF9FF;
-    --card:#ffffff;
-    --muted:#7b7b7b;
-    --glass: rgba(255,255,255,0.65);
-  }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(180deg, #fbf9ff 0%, #f3f7ff 100%);
+      color: #222;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
 
-  *{box-sizing:border-box}
-  html,body{height:100%}
-  body{
-    margin:0;
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(180deg,#fbf9ff 0%, #f3f7ff 100%);
-    color:#222;
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
-    overflow-x:hidden;
-  }
+    /* ========== SPLASH SCREEN (Вступительный экран) ========== */
+    #welcome {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      z-index: 1000;
+      background: radial-gradient(ellipse at center, rgba(0,0,0,0.18), rgba(0,0,0,0.35));
+    }
 
-  /* ---------- WELCOME / SPLASH ---------- */
-  #welcome {
-    position:fixed;
-    inset:0;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    z-index:1000;
-    background: radial-gradient(ellipse at center, rgba(0,0,0,0.18), rgba(0,0,0,0.35));
-  }
-  #welcome .bg {
-    position:absolute;
-    inset:0;
-    background-image: url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=1920');
-    background-size:cover;
-    background-position:center;
-    filter: blur(6px) brightness(.9) saturate(1.1);
-    transform: scale(1.05);
-    will-change: transform;
-  }
-  #welcome::after{
-    content:"";
-    position:absolute; inset:0;
-    background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(0,0,0,0.18));
-    mix-blend-mode:overlay;
-  }
-  .welcome-inner{
-    position:relative;
-    z-index:2;
-    padding:40px;
-    max-width:900px;
-    color:#fff;
-    text-shadow: 0 6px 18px rgba(0,0,0,0.5);
-    transform-origin:center;
-    animation: popIn .9s cubic-bezier(.2,.9,.3,1);
-  }
-  @keyframes popIn{
-    from{opacity:0; transform:translateY(18px) scale(.98)}
-    to{opacity:1; transform:translateY(0) scale(1)}
-  }
-  .headline{
-    font-family: 'Playfair Display', serif;
-    font-weight:700;
-    font-size: clamp(28px, 5.2vw, 54px);
-    line-height:1;
-    margin:0 0 14px;
-  }
-  .subline{
-    font-size: clamp(14px, 2.2vw, 20px);
-    opacity:.95;
-    margin-bottom:22px;
-    font-weight:300;
-  }
-  .btn-open{
-    display:inline-flex;
-    gap:10px;
-    align-items:center;
-    background: linear-gradient(90deg,var(--accent),var(--accent-2));
-    border:none;
-    color:#fff;
-    padding:14px 28px;
-    border-radius:999px;
-    font-weight:600;
-    font-size:16px;
-    cursor:pointer;
-    box-shadow: 0 10px 30px rgba(199,125,255,0.22);
-    transition: transform .28s ease, box-shadow .28s ease;
-  }
-  .btn-open:hover{ transform: translateY(-4px); box-shadow:0 18px 40px rgba(199,125,255,0.28); }
-  .hint{ font-size:12px; opacity:.9; margin-top:10px }
+    #welcome .bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=1920');
+      background-size: cover;
+      background-position: center;
+      filter: blur(6px) brightness(0.9) saturate(1.1);
+      transform: scale(1.05);
+      will-change: transform;
+    }
 
-  /* ---------- NAVBAR ---------- */
-  nav{
-    position:fixed;
-    top:18px; left:50%;
-    transform:translateX(-50%);
-    z-index:1200;
-    width:calc(100% - 40px);
-    max-width:1100px;
-    display:flex;
-    justify-content:center;
-    pointer-events:none;
-  }
-  nav .nav-inner{
-    pointer-events:auto;
-    display:flex;
-    gap:14px;
-    background: rgba(255,255,255,0.6);
-    backdrop-filter: blur(8px);
-    padding:8px 14px;
-    border-radius:999px;
-    box-shadow: 0 6px 22px rgba(16,24,40,0.08);
-    align-items:center;
-  }
-  nav a{
-    color:#2b2b2b; text-decoration:none; font-weight:600; font-size:14px;
-    padding:6px 10px; border-radius:8px;
-  }
-  nav a:hover{ background: rgba(0,0,0,0.04) }
+    #welcome::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(0,0,0,0.18));
+      mix-blend-mode: overlay;
+    }
 
-  /* ---------- MAIN LAYOUT ---------- */
-  main{ padding-top:120px; }
-  .section{ padding:10px 18px; display:block; }
-  .card {
-    max-width:980px;
-    margin: 0 auto 40px auto;
-    background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.98));
-    border-radius:18px;
-    padding:34px;
-    box-shadow: 0 18px 50px rgba(16,24,40,0.06);
-  }
-  .title{
-    font-family:'Playfair Display', serif;
-    font-size: clamp(20px,4.2vw,36px);
-    margin:0 0 8px;
-    text-align:center;
-    color:#2a2a2a;
-  }
-  .muted{ color:var(--muted); font-size:14px; text-align:center; margin-bottom:18px; }
+    .welcome-inner {
+      position: relative;
+      z-index: 2;
+      padding: 40px;
+      max-width: 900px;
+      color: #fff;
+      text-shadow: 0 6px 18px rgba(0,0,0,0.5);
+      transform-origin: center;
+      animation: popIn 0.9s cubic-bezier(0.2, 0.9, 0.3, 1);
+    }
 
-  /* ---------- TIMER (резиновый вариант) ---------- */
-  .timer-grid {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    margin-top: 18px;
-    flex-wrap: nowrap; /* всегда в один ряд */
-  }
+    @keyframes popIn {
+      from { opacity: 0; transform: translateY(18px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
 
-  .time-box {
-    flex: 1 1 0;           /* резиновый размер */
-    min-width: 60px;        /* минимальная ширина на узких экранах */
-    background: linear-gradient(180deg,#fff,#fbfbff);
-    border-radius: 12px;
-    padding: 14px 8px;
-    text-align: center;
-    box-shadow: 0 8px 24px rgba(31,41,55,0.06);
-  }
+    .headline {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: clamp(28px, 5.2vw, 54px);
+      line-height: 1;
+      margin: 0 0 14px;
+    }
 
-  .time-value {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(20px, 6vw, 28px); /* адаптивный размер */
-    font-weight: 700;
-    color: var(--accent);
-    line-height: 1;
-  }
+    .subline {
+      font-size: clamp(14px, 2.2vw, 20px);
+      opacity: 0.95;
+      margin-bottom: 22px;
+      font-weight: 300;
+    }
 
-  .time-label {
-    font-size: clamp(10px, 2.5vw, 13px); /* адаптивный размер */
-    color: var(--muted);
-    margin-top: 6px;
-  }
+    .btn-open {
+      display: inline-flex;
+      gap: 10px;
+      align-items: center;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      border: none;
+      color: #fff;
+      padding: 14px 28px;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 16px;
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(199,125,255,0.22);
+      transition: transform 0.28s ease, box-shadow 0.28s ease;
+    }
 
-  .map-wrap{ margin-top:18px; border-radius:12px; overflow:hidden; }
+    .btn-open:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 40px rgba(199,125,255,0.28);
+    }
 
-  /* THANKS MODAL */
-  #thanks {
-    position:fixed; inset:0; display:flex; align-items:center; justify-content:center;
-    background: rgba(8,10,20,0.32); z-index:2000; visibility:hidden; opacity:0;
-    transition: opacity .28s ease, visibility .28s;
-  }
-  #thanks .box{
-    background:#fff; padding:22px; border-radius:12px; max-width:420px; text-align:center;
-    box-shadow: 0 18px 50px rgba(16,24,40,0.12);
-  }
-  #thanks.show{ visibility:visible; opacity:1; }
+    .hint {
+      font-size: 12px;
+      opacity: 0.9;
+      margin-top: 10px;
+    }
 
-  /* RSVP custom button */
-  .btn-gradient{
-    background: linear-gradient(90deg, #C77DFF, #FF9DB5);
-    color:#fff;
-    border:none;
-    border-radius:10px;
-    font-size:1.1rem;
-    padding: 4px 9px;
-    transition: all 0.3s ease;
-  }
-  .btn-gradient:hover{
-    transform: translateY(-3px);
-    box-shadow: 0 12px 30px rgba(199,125,255,0.35);
-  }
+    /* ========== НАВИГАЦИОННОЕ МЕНЮ ========== */
+    nav {
+      position: fixed;
+      top: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1200;
+      width: calc(100% - 40px);
+      max-width: 1100px;
+      display: flex;
+      justify-content: center;
+      pointer-events: none;
+    }
 
-  footer{ text-align:center; padding:28px 16px; color:var(--muted); font-size:14px; }
-</style>
+    nav .nav-inner {
+      pointer-events: auto;
+      display: flex;
+      gap: 14px;
+      background: rgba(255,255,255,0.6);
+      backdrop-filter: blur(8px);
+      padding: 8px 14px;
+      border-radius: 999px;
+      box-shadow: 0 6px 22px rgba(16,24,40,0.08);
+      align-items: center;
+    }
+
+    nav a {
+      color: #2b2b2b;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      padding: 6px 10px;
+      border-radius: 8px;
+    }
+
+    nav a:hover {
+      background: rgba(0,0,0,0.04);
+    }
+
+    /* ========== ОСНОВНОЙ КОНТЕНТ ========== */
+    main {
+      padding-top: 120px;
+    }
+
+    .section {
+      padding: 10px 18px;
+      display: block;
+    }
+
+    .card {
+      max-width: 980px;
+      margin: 0 auto 40px auto;
+      background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.98));
+      border-radius: 18px;
+      padding: 34px;
+      box-shadow: 0 18px 50px rgba(16,24,40,0.06);
+    }
+
+    .title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(20px, 4.2vw, 36px);
+      margin: 0 0 8px;
+      text-align: center;
+      color: #2a2a2a;
+    }
+
+    .muted {
+      color: var(--muted);
+      font-size: 14px;
+      text-align: center;
+      margin-bottom: 18px;
+    }
+
+    /* ========== ТАЙМЕР ОБРАТНОГО ОТСЧЁТА ========== */
+    .timer-grid {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 18px;
+      flex-wrap: nowrap;
+    }
+
+    .time-box {
+      flex: 1 1 0;
+      min-width: 60px;
+      background: linear-gradient(180deg, #fff, #fbfbff);
+      border-radius: 12px;
+      padding: 14px 8px;
+      text-align: center;
+      box-shadow: 0 8px 24px rgba(31,41,55,0.06);
+    }
+
+    .time-value {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(20px, 6vw, 28px);
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .time-label {
+      font-size: clamp(10px, 2.5vw, 13px);
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    /* ========== КАРТА МЕСТА ПРОВЕДЕНИЯ ========== */
+    .map-wrap {
+      margin-top: 18px;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    /* ========== МОДАЛЬНОЕ ОКНО "Спасибо" ========== */
+    #thanks {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(8,10,20,0.32);
+      z-index: 2000;
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.28s ease, visibility 0.28s;
+    }
+
+    #thanks .box {
+      background: #fff;
+      padding: 22px;
+      border-radius: 12px;
+      max-width: 420px;
+      text-align: center;
+      box-shadow: 0 18px 50px rgba(16,24,40,0.12);
+    }
+
+    #thanks.show {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    /* ========== КНОПКИ С ГРАДИЕНТОМ ========== */
+    .btn-gradient {
+      background: linear-gradient(90deg, #C77DFF, #FF9DB5);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      padding: 4px 9px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-gradient:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(199,125,255,0.35);
+    }
+
+    footer {
+      text-align: center;
+      padding: 28px 16px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+  </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav aria-label="Главное меню">
-  <div class="nav-inner" role="navigation">
-    <a href="#home" onclick="scrollToId(event,'home')">Главная</a>
-    <a href="#invite" onclick="scrollToId(event,'invite')">Приглашение</a>
-    <a href="#location" onclick="scrollToId(event,'location')">Место</a>
-    <a href="#rsvp" onclick="scrollToId(event,'rsvp')">RSVP</a>
-  </div>
-</nav>
+  <!-- ========== НАВИГАЦИЯ ========== -->
+  <nav aria-label="Главное меню">
+    <div class="nav-inner" role="navigation">
+      <a href="#home" onclick="scrollToId(event, 'home')">Главная</a>
+      <a href="#invite" onclick="scrollToId(event, 'invite')">Приглашение</a>
+      <a href="#location" onclick="scrollToId(event, 'location')">Место</a>
+      <a href="#rsvp" onclick="scrollToId(event, 'rsvp')">RSVP</a>
+    </div>
+  </nav>
 
-<!-- WELCOME / SPLASH -->
-<section id="welcome" aria-hidden="false">
-  <div class="bg" aria-hidden="true"></div>
-  <div class="welcome-inner" id="home">
-    <h1 class="headline">Мы решили пожениться</h1>
-    <p class="subline">Искренне приглашаем вас разделить с нами этот счастливый день</p>
-    <button class="btn-open" id="openBtn" aria-label="Открыть приглашение">Открыть приглашение</button>
-  </div>
-</section>
+  <!-- ========== SPLASH SCREEN ========== -->
+  <section id="welcome" aria-hidden="false">
+    <div class="bg" aria-hidden="true"></div>
+    <div class="welcome-inner" id="home">
+      <h1 class="headline">Мы решили пожениться</h1>
+      <p class="subline">Искренне приглашаем вас разделить с нами этот счастливый день</p>
+      <button class="btn-open" id="openBtn" aria-label="Открыть приглашение">Открыть приглашение</button>
+    </div>
+  </section>
 
-<main id="main" style="opacity:0; transform:translateY(18px); transition: all .7s ease; pointer-events:none;">
-  <!-- INVITATION -->
-  <section class="section" id="invite">
-    <div class="card text-center">
-      <h2 class="title">Иван & Мария</h2>
-      <p class="muted">Мы будем рады видеть вас на нашей свадьбе</p>
-      <div class="mt-3">
-        <p style="margin:6px 0 0;"><strong>Дата:</strong> 02 февраля 2026 г.</p>
-        <p style="margin:2px 0 12px;"><strong>Время:</strong> 16:00</p>
-        <div class="timer-grid" role="timer" aria-live="polite">
-          <div class="time-box"><div class="time-value" id="days">00</div><div class="time-label">Дней</div></div>
-          <div class="time-box"><div class="time-value" id="hours">00</div><div class="time-label">Часов</div></div>
-          <div class="time-box"><div class="time-value" id="minutes">00</div><div class="time-label">Минут</div></div>
-          <div class="time-box"><div class="time-value" id="seconds">00</div><div class="time-label">Секунд</div></div>
+  <!-- ========== ОСНОВНОЙ КОНТЕНТ (показывается после нажатия кнопки) ========== -->
+  <main id="main" style="opacity: 0; transform: translateY(18px); transition: all 0.7s ease; pointer-events: none;">
+
+    <!-- ========== БЛОК: ПРИГЛАШЕНИЕ ========== -->
+    <section class="section" id="invite">
+      <div class="card text-center">
+        <h2 class="title">Иван & Мария</h2>
+        <p class="muted">Мы будем рады видеть вас на нашей свадьбе</p>
+        <div class="mt-3">
+          <p style="margin: 6px 0 0;"><strong>Дата:</strong> 06 апреля 2026 г.</p>
+          <p style="margin: 2px 0 12px;"><strong>Время:</strong> 16:00</p>
+          <div class="timer-grid" role="timer" aria-live="polite">
+            <div class="time-box"><div class="time-value" id="days">00</div><div class="time-label">Дней</div></div>
+            <div class="time-box"><div class="time-value" id="hours">00</div><div class="time-label">Часов</div></div>
+            <div class="time-box"><div class="time-value" id="minutes">00</div><div class="time-label">Минут</div></div>
+            <div class="time-box"><div class="time-value" id="seconds">00</div><div class="time-label">Секунд</div></div>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- LOCATION -->
-  <section class="section" id="location">
-    <div class="card">
-      <h3 class="title">Место проведения</h3>
-      <p class="muted">Ресторан Хан Султан — Улица Райымбек батыра, 166а, Алматы</p>
-      <div class="d-flex flex-column gap-3 mt-3">
-        <div class="map-wrap">
-          <iframe src="https://yandex.kz/map-widget/v1/-/CLGLIFNu" width="100%" height="320" frameborder="0" allowfullscreen style="border:0"></iframe>
-        </div>
-        <div class="d-flex gap-3 flex-wrap justify-content-center mt-2">
-          <a href="https://yandex.kz/maps/-/CLGLIFNu" target="_blank" rel="noopener" class="btn btn-primary px-3 py-2">Открыть в Яндекс.Картах</a>
+    <!-- ========== БЛОК: МЕСТО ПРОВЕДЕНИЯ ========== -->
+    <section class="section" id="location">
+      <div class="card">
+        <h3 class="title">Место проведения</h3>
+        <p class="muted">Ресторан Хан Султан — Улица Райымбек батыра, 166а, Алматы</p>
+        <div class="d-flex flex-column gap-3 mt-3">
+          <div class="map-wrap">
+            <!-- Яндекс.Карта с embed-виджетом -->
+            <iframe src="https://yandex.kz/map-widget/v1/-/CLGLIFNu" width="100%" height="320" frameborder="0" allowfullscreen style="border:0"></iframe>
+          </div>
+          <div class="d-flex gap-3 flex-wrap justify-content-center mt-2">
+            <a href="https://yandex.kz/maps/-/CLGLIFNu" target="_blank" rel="noopener" class="btn btn-primary px-3 py-2">Открыть в Яндекс.Картах</a>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- RSVP -->
-  <section class="section" id="rsvp">
-    <div class="card shadow-lg p-5" style="max-width:700px; margin:0 auto; border-radius:20px;">
-      <h3 class="title mb-3">Подтвердите участие (RSVP)</h3>
-      <p class="muted text-center mb-4">Пожалуйста, оставьте ваше имя и выберите участие</p>
-      <form id="rsvpForm" class="row g-4" autocomplete="off" aria-label="Форма подтверждения">
-        <div class="col-md-6">
-          <input type="text" class="form-control form-control-lg" id="guestName" placeholder="Ваше имя" required>
-        </div>
-        <div class="col-md-6">
-          <select class="form-select form-select-lg" id="attendance" required>
-            <option value="Приеду один(а)">Приеду один(а)</option>
-            <option value="Приеду с партнером">Приеду с партнером</option>
-            <option value="Не смогу прийти">Не смогу прийти</option>
-          </select>
-        </div>
-        <div class="col-12 text-center mt-3">
-          <button type="submit" class="btn btn-gradient px-5 py-3 fw-bold">Отправить в WhatsApp</button>
-        </div>
-      </form>
-    </div>
-  </section>
+    <!-- ========== БЛОК: ФОРМА RSVP ========== -->
+    <section class="section" id="rsvp">
+      <div class="card shadow-lg p-5" style="max-width: 700px; margin: 0 auto; border-radius: 20px;">
+        <h3 class="title mb-3">Подтвердите участие (RSVP)</h3>
+        <p class="muted text-center mb-4">Пожалуйста, оставьте ваше имя и выберите участие</p>
+        <form id="rsvpForm" class="row g-4" autocomplete="off" aria-label="Форма подтверждения">
+          <div class="col-md-6">
+            <input type="text" class="form-control form-control-lg" id="guestName" placeholder="Ваше имя" required>
+          </div>
+          <div class="col-md-6">
+            <select class="form-select form-select-lg" id="attendance" required>
+              <option value="Приеду один(а)">Приеду один(а)</option>
+              <option value="Приеду с партнером">Приеду с партнером</option>
+              <option value="Не смогу прийти">Не смогу прийти</option>
+            </select>
+          </div>
+          <div class="col-12 text-center mt-3">
+            <button type="submit" class="btn btn-primary px-3 py-2 fw-bold">Отправить</button>
+          </div>
+        </form>
+      </div>
+    </section>
 
-  <footer>
-    &copy; 2025 Иван & Мария — Спасибо, что с нами
-  </footer>
-</main>
+    <!-- ========== ФУТЕР ========== -->
+    <footer>
+      &copy; 2025 Иван & Мария — Спасибо, что с нами
+    </footer>
+  </main>
 
-<!-- THANKS MODAL -->
-<div id="thanks" role="dialog" aria-modal="true" aria-hidden="true">
-  <div class="box">
-    <h3 style="margin-top:0; font-family:'Playfair Display', serif">Спасибо!</h3>
-    <p class="small">Мы получили ваше сообщение. До скорой встречи!</p>
-    <div class="mt-2">
-      <button class="btn btn-gradient" onclick="closeThanks()">Закрыть</button>
+  <!-- ========== МОДАЛЬНОЕ ОКНО: СПАСИБО ========== -->
+  <div id="thanks" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="box">
+      <h3 style="margin-top: 0; font-family: 'Playfair Display', serif">Спасибо!</h3>
+      <p class="small">Мы получили ваше сообщение. До скорой встречи!</p>
+      <div class="mt-2">
+        <button class="btn btn-gradient" onclick="closeThanks()">Закрыть</button>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- AUDIO -->
-<audio id="audio" loop preload="auto">
-  <source src="music.mp3" type="audio/mpeg">
-  Ваш браузер не поддерживает аудио
-</audio>
+  <!-- ========== ФОНОВАЯ МУЗЫКА ========== -->
+  <audio id="audio" loop preload="auto">
+    <source src="music.mp3" type="audio/mpeg">
+    Ваш браузер не поддерживает аудио.
+  </audio>
 
-<script>
-function scrollToId(e,id){ if(e) e.preventDefault(); const el=document.getElementById(id); if(!el) return; el.scrollIntoView({behavior:'smooth', block:'start'}); }
+  <!-- ========== JAVASCRIPT ========== -->
+  <script>
+    // Плавная прокрутка к якорю
+    function scrollToId(event, id) {
+      if (event) event.preventDefault();
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
 
-const openBtn=document.getElementById('openBtn');
-const welcome=document.getElementById('welcome');
-const main=document.getElementById('main');
-const audio=document.getElementById('audio');
+    // Элементы DOM
+    const openBtn = document.getElementById('openBtn');
+    const welcome = document.getElementById('welcome');
+    const main = document.getElementById('main');
+    const audio = document.getElementById('audio');
 
-openBtn.addEventListener('click',()=>{
-  welcome.style.transition='opacity .6s ease, transform .6s ease';
-  welcome.style.opacity=0;
-  welcome.style.transform='scale(.98) translateY(-10px)';
-  setTimeout(()=>{ welcome.style.display='none'; },650);
+    // Обработчик открытия приглашения
+    openBtn.addEventListener('click', () => {
+      // Анимация скрытия splash screen
+      welcome.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      welcome.style.opacity = 0;
+      welcome.style.transform = 'scale(0.98) translateY(-10px)';
+      setTimeout(() => { welcome.style.display = 'none'; }, 650);
 
-  requestAnimationFrame(()=>{ main.style.pointerEvents='auto'; main.style.opacity=1; main.style.transform='translateY(0)'; });
+      // Показ основного контента
+      requestAnimationFrame(() => {
+        main.style.pointerEvents = 'auto';
+        main.style.opacity = 1;
+        main.style.transform = 'translateY(0)';
+      });
 
-  try{ audio.volume=0.65; const playPromise=audio.play(); if(playPromise!==undefined) playPromise.catch(()=>{}); }catch(e){console.warn('play audio failed',e);}
-  initCountdown();
-});
+      // Воспроизведение фона
+      try {
+        audio.volume = 0.65;
+        const playPromise = audio.play();
+        if (playPromise !== undefined) playPromise.catch(() => {});
+      } catch (e) {
+        console.warn('Не удалось воспроизвести аудио', e);
+      }
 
-function parseWeddingDate(){
-  const inviteCard=document.querySelector('#invite .card'); if(!inviteCard) return null;
-  const ps=inviteCard.querySelectorAll('p'); let dateText=null,timeText=null;
-  ps.forEach(p=>{ const txt=p.textContent.trim(); if(txt.indexOf('Дата:')===0) dateText=txt; if(txt.indexOf('Время:')===0) timeText=txt; });
-  if(!dateText) return new Date('2026-02-02 16:00').getTime();
-  const dMatch=dateText.match(/Дата:\s*(\d{1,2})\s+([^\s]+)\s+(\d{4})/i);
-  const tMatch=timeText?timeText.match(/Время:\s*(\d{1,2}:\d{2})/):null;
-  if(!dMatch) return new Date('2026-02-02 16:00').getTime();
-  const day=dMatch[1].padStart(2,'0'); const monthName=dMatch[2].toLowerCase(); const year=dMatch[3];
-  const time=(tMatch&&tMatch[1])?tMatch[1]:'16:00';
-  const monthMap={"января":"01","февраля":"02","марта":"03","апреля":"04","мая":"05","июня":"06","июля":"07","августа":"08","сентября":"09","октября":"10","ноября":"11","декабря":"12"};
-  const month=monthMap[monthName]||'02';
-  return new Date(`${year}-${month}-${day}T${time}:00`).getTime();
-}
+      // Инициализация таймера
+      initCountdown();
+    });
 
-let countdownInterval=null;
-function initCountdown(){
-  const target=parseWeddingDate();
-  if(!target) return;
-  if(countdownInterval) clearInterval(countdownInterval);
-  function update(){
-    const now=Date.now(); let diff=target-now;
-    const dEl=document.getElementById('days'),hEl=document.getElementById('hours'),mEl=document.getElementById('minutes'),sEl=document.getElementById('seconds');
-    if(diff<=0){ dEl.textContent='00'; hEl.textContent='00'; mEl.textContent='00'; sEl.textContent='00'; clearInterval(countdownInterval); return; }
-    const days=Math.floor(diff/(1000*60*60*24)); diff-=days*1000*60*60*24;
-    const hours=Math.floor(diff/(1000*60*60)); diff-=hours*1000*60*60;
-    const minutes=Math.floor(diff/(1000*60)); diff-=minutes*1000*60;
-    const seconds=Math.floor(diff/1000);
-    dEl.textContent=String(days).padStart(2,'0');
-    hEl.textContent=String(hours).padStart(2,'0');
-    mEl.textContent=String(minutes).padStart(2,'0');
-    sEl.textContent=String(seconds).padStart(2,'0');
-  }
-  update(); countdownInterval=setInterval(update,1000);
-}
+    // Парсинг даты свадьбы из разметки
+    function parseWeddingDate() {
+      const inviteCard = document.querySelector('#invite .card');
+      if (!inviteCard) return new Date('2026-02-02T16:00').getTime();
 
-const rsvpForm=document.getElementById('rsvpForm');
-const thanks=document.getElementById('thanks');
-rsvpForm.addEventListener('submit',function(e){
-  e.preventDefault();
-  const name=document.getElementById('guestName').value.trim()||'Гость';
-  const attend=document.getElementById('attendance').value;
-  const phoneTarget='77081698869';
-  const text=`Здравствуйте, Иван и Мария!%0A%0AМеня зовут: ${encodeURIComponent(name)}%0AУчастие: ${encodeURIComponent(attend)}`;
-  const waLink=`https://wa.me/${phoneTarget}?text=${text}`;
-  window.open(waLink,'_blank');
-  showThanks();
-});
+      const ps = inviteCard.querySelectorAll('p');
+      let dateText = null, timeText = null;
+      ps.forEach(p => {
+        const txt = p.textContent.trim();
+        if (txt.startsWith('Дата:')) dateText = txt;
+        if (txt.startsWith('Время:')) timeText = txt;
+      });
 
-function showThanks(){ thanks.classList.add('show'); thanks.setAttribute('aria-hidden','false'); setTimeout(()=>{ closeThanks(); },5000); }
-function closeThanks(){ thanks.classList.remove('show'); thanks.setAttribute('aria-hidden','true'); }
-thanks.addEventListener('click',(e)=>{ if(e.target===thanks) closeThanks(); });
-document.addEventListener('keydown',(e)=>{ if(e.key==='Escape') closeThanks(); });
+      const dMatch = dateText?.match(/Дата:\s*(\d{1,2})\s+([^\s]+)\s+(\d{4})/i);
+      const tMatch = timeText?.match(/Время:\s*(\d{1,2}:\d{2})/);
+      if (!dMatch) return new Date('2026-02-02T16:00').getTime();
 
-(function openIfHash(){ if(location.hash&&location.hash.length>1){ document.getElementById('openBtn').click(); const id=location.hash.substring(1); setTimeout(()=>{ scrollToId(null,id); },700); }})();
-</script>
+      const day = dMatch[1].padStart(2, '0');
+      const monthName = dMatch[2].toLowerCase();
+      const year = dMatch[3];
+      const time = (tMatch && tMatch[1]) ? tMatch[1] : '16:00';
+
+      const monthMap = {
+        "января": "01", "февраля": "02", "марта": "03", "апреля": "04",
+        "мая": "05", "июня": "06", "июля": "07", "августа": "08",
+        "сентября": "09", "октября": "10", "ноября": "11", "декабря": "12"
+      };
+      const month = monthMap[monthName] || '02';
+      return new Date(`${year}-${month}-${day}T${time}:00`).getTime();
+    }
+
+    // Таймер обратного отсчёта
+    let countdownInterval = null;
+    function initCountdown() {
+      const target = parseWeddingDate();
+      if (!target) return;
+      if (countdownInterval) clearInterval(countdownInterval);
+
+      function update() {
+        const now = Date.now();
+        let diff = target - now;
+
+        const dEl = document.getElementById('days');
+        const hEl = document.getElementById('hours');
+        const mEl = document.getElementById('minutes');
+        const sEl = document.getElementById('seconds');
+
+        if (diff <= 0) {
+          dEl.textContent = '00';
+          hEl.textContent = '00';
+          mEl.textContent = '00';
+          sEl.textContent = '00';
+          clearInterval(countdownInterval);
+          return;
+        }
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        diff -= days * 1000 * 60 * 60 * 24;
+        const hours = Math.floor(diff / (1000 * 60 * 60));
+        diff -= hours * 1000 * 60 * 60;
+        const minutes = Math.floor(diff / (1000 * 60));
+        diff -= minutes * 1000 * 60;
+        const seconds = Math.floor(diff / 1000);
+
+        dEl.textContent = String(days).padStart(2, '0');
+        hEl.textContent = String(hours).padStart(2, '0');
+        mEl.textContent = String(minutes).padStart(2, '0');
+        sEl.textContent = String(seconds).padStart(2, '0');
+      }
+
+      update();
+      countdownInterval = setInterval(update, 1000);
+    }
+
+    // Обработка формы RSVP
+    const rsvpForm = document.getElementById('rsvpForm');
+    const thanks = document.getElementById('thanks');
+
+    rsvpForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const name = document.getElementById('guestName').value.trim() || 'Гость';
+      const attend = document.getElementById('attendance').value;
+      const phoneTarget = '77081698869'; // Номер без пробелов
+      const text = `Здравствуйте, Иван и Мария!%0A%0AМеня зовут: ${encodeURIComponent(name)}%0AУчастие: ${encodeURIComponent(attend)}`;
+      const waLink = `https://wa.me/${phoneTarget}?text=${text}`;
+      window.open(waLink, '_blank');
+      showThanks();
+    });
+
+    // Отображение модального окна "Спасибо"
+    function showThanks() {
+      thanks.classList.add('show');
+      thanks.setAttribute('aria-hidden', 'false');
+      setTimeout(() => { closeThanks(); }, 5000); // Автозакрытие через 5 сек
+    }
+
+    // Закрытие окна "Спасибо"
+    function closeThanks() {
+      thanks.classList.remove('show');
+      thanks.setAttribute('aria-hidden', 'true');
+    }
+
+    // Закрытие по клику вне окна или по Escape
+    thanks.addEventListener('click', (e) => { if (e.target === thanks) closeThanks(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeThanks(); });
+
+    // Автоматическое открытие при наличии хэша в URL
+    (function openIfHash() {
+      if (location.hash && location.hash.length > 1) {
+        document.getElementById('openBtn').click();
+        const id = location.hash.substring(1);
+        setTimeout(() => { scrollToId(null, id); }, 700);
+      }
+    })();
+  </script>
 
 </body>
 </html>
